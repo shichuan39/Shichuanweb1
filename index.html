@@ -8,7 +8,7 @@
     body {
       margin: 0;
       font-family: "Microsoft YaHei", sans-serif;
-      background: linear-gradient(135deg, #ff000025, #8577ff);
+      background: linear-gradient(135deg, #ff8a8a25, #8577ff);
       color: white;
       display: flex;
       justify-content: center;
@@ -22,9 +22,119 @@
 </head>
 <body>
   <div>
-    <h1>关注诗川喵 谢谢喵</h1>
-    <p>这是我的第一个网站，后面将继续开发并完善</p >
-      <img src="images/chapter2backround.png" width="300" style="border-radius: 40px; outline: 1px solid white;">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: "Microsoft YaHei", sans-serif;
+      background: linear-gradient(135deg, #667eea, #d0a1ff);
+      color: rgb(255, 255, 255);
+      min-height: 100vh;
+    }
+
+    /* 导航栏 */
+    nav {
+      display: flex;
+      justify-content: center;
+      gap: 30px;
+      padding: 20px;
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
+      border-radius: 30px;
+    }
+
+    nav button {
+      background: none;
+      border: none;
+      color: white;
+      font-size: 18px;
+      cursor: pointer;
+      padding: 8px 20px;
+      border-radius: 30px;
+      transition: 0.3s;
+      font-family: inherit;
+    }
+
+    nav button:hover {
+      background: rgba(255, 255, 255, 0.2);
+    }
+
+    nav button.active {
+      background: white;
+      color: #764ba2;
+    }
+
+    /* 页面内容区域 */
+    .page {
+      display: none;           /* 默认全部隐藏 */
+      padding: 60px 20px;
+      text-align: center;
+      animation: fadeIn 0.4s;
+    }
+
+    .page.active {
+      display: block;          /* 只显示激活的那个 */
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    h1 { font-size: 42px; margin-bottom: 16px; }
+    p { font-size: 20px; opacity: 0.9; line-height: 1.8; }
+
+    img {
+      border-radius: 20px;
+      margin-top: 30px;
+      max-width: 90%;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- 导航栏 -->
+  <nav>
+    <button class="active" onclick="showPage('home', this)">首页</button>
+    <button onclick="showPage('about', this)">关于本站</button>
+    <button onclick="showPage('contact', this)">联系我</button>
+  </nav>
+
+  <!-- 首页 -->
+  <div id="home" class="page active">
+    <h1>关注诗川喵 谢谢</h1>
+    <p>这是我的第一个网站</p >
+  </div>
+
+  <!-- 关于本站 -->
+  <div id="about" class="page">
+    <h1>关于本站</h1>
+    <p>后面将继续开发并完善</p >
+  </div>
+
+  <!-- 联系我 -->
+  <div id="contact" class="page">
+    <h1>联系我</h1>
+    <p>邮箱：zhuty968@icloud.com</p >
+        <img src="images2/profile pict5.jpg" width="100" style="border-radius: 70px; outline: 1px solid white;"position="absolute" top="100" left="100">
+  </div>
+
+  <script>
+    function showPage(id, btn) {
+      // 1. 隐藏所有页面
+      document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+      // 2. 显示目标页面
+      document.getElementById(id).classList.add('active');
+      // 3. 导航栏高亮
+      document.querySelectorAll('nav button').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+    }
+  </script>
+
+</body>
+</html>
+    <p>Shichuan的网站</p>
+      <img src="images/chapter2backround.png" width="350" style="border-radius: 40px; outline: 1px solid white;">
   </div>
 </body>
 </html>
