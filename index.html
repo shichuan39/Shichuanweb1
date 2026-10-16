@@ -1,14 +1,54 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
+
+  <button id="theme-toggle" onclick="toggleTheme()">暗</button>
+
+  <style>
+  #theme-toggle {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  border: none;
+  background: rgba(255, 255, 255, 0.171);
+  color: #252525;
+  font-size: 22px;
+  cursor: pointer;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+  transition: color 0.4s;
+  z-index: 999;
+}
+
+#theme-toggle:hover {
+  transform: scale(1.1);
+}
+</style>
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
 
-    body {
-      font-family: "Microsoft YaHei", sans-serif;
-      background: linear-gradient(135deg, #667eea, #ffffff);
-      color: rgb(255, 255, 255);
-      min-height: 100vh;
-    }
+    :root {
+  --bg-gradient: linear-gradient(135deg, #5d82ff, #ffffffe3);
+  --text-color: rgb(255, 255, 255);
+}
+
+/* 深色模式 */
+body.dark {
+  --bg-gradient: linear-gradient(135deg, #6a92ff, #29009b);
+  --text-color: rgb(230, 230, 230);
+}
+
+body {
+overflow-x: hidden;
+}
+body {
+  font-family: "Microsoft YaHei", sans-serif;
+  background: var(--bg-gradient);
+  color: var(--text-color);
+  min-height: 100vh;
+  transition: 0.4s, color 0.4s;
+}
 
     /* 导航栏 */
     nav {
@@ -90,7 +130,7 @@
     background: rgba(0, 0, 0, 0.089);
     border-radius: 15px;
     padding: 10px 0;
-    margin-top: 20px;
+    margin-top: -20px;
     width: 90%;
     max-width: 500px;
     margin-left: auto;
@@ -113,7 +153,7 @@
 </style>
 
     <div class="notice-bar"> 
-  <p class="notice-text" >服务选项更新了公益资源包！！</p >
+  <p class="notice-text" >26-10-16: 国内初测-服务选项更新了公益资源包！！</p >
     </div>
     <h1 style="margin-top: 50px;">关注诗川喵 谢谢</h1>
      <img src="images/chapter2backround.png" width="375" style="border-radius: 30px; outline: 1px solid white;">
@@ -123,7 +163,7 @@
     /* ↓↓↓ 新加的 CSS 放这里 ↓↓↓ */
     .filter-btn {
       background: none;
-      border: 1px solid white;
+      border: 1px solid rgb(255, 255, 255);
       color: white;
       font-size: 16px;
       padding: 6px 10px;
@@ -163,28 +203,26 @@
   <!-- 服务 -->
 <div id="services" class="page">
   <h1>代剪/工程/建模</h1>
-  <h1 style="scale: 0.4; margin-top: -20px;">edit services</h1>
-  <h1 style="scale: 0.4; margin-top: -20px;">projects pack</h1>
-  <h1 style="scale: 0.4; margin-top: -20px;">modeling</h1>
-
+  <p style="margin-left: 160px; margin-bottom: -60px;">显示福利工程</p>
+ 
   <!-- AE 行 -->
   <div style="display: flex; align-items: center; justify-content: center; gap: 20px; margin-top: 40px;">
-     <img src="images3/AE.jpg" width="100" style="border-radius: 25px; outline: 1px solid white;">
-    <p style="margin: 0;">After Effect</p >
+     <img src="images3/AE.jpg" width="80" style="border-radius: 20px; outline: 1px solid white;">
+    <p style="margin: 0; scale: 0.8;">After Effect</p >
     <button class="filter-btn" data-target="ae" onclick="toggleFilter(this)">工程</button>
   </div>
 
   <!-- NV 行 -->
-  <div style="display: flex; align-items: center; justify-content: center; gap: 20px; margin-top: 30px;">
-    <img src="images3/NV.jpg" width="100" style="border-radius: 25px; outline: 1px solid white;">
-    <p style="margin: 0;">NodeVideo</p >
+  <div style="display: flex; align-items: center; justify-content: center; gap: 20px; margin-top: 10px;">
+    <img src="images3/NV.jpg" width="80" style="border-radius: 20px; outline: 1px solid white;">
+    <p style="margin: 0; scale: 0.8;">NodeVideo</p >
     <button class="filter-btn" data-target="nv" onclick="toggleFilter(this)">工程</button>
   </div>
 
   <!-- Blender 行 -->
-  <div style="display: flex; align-items: center; justify-content: center; gap: 55px; margin-top: 40px;">
-    <img src="images3/blender.png" width="100">
-    <p style="margin-left: -30px;">Blender</p >
+  <div style="display: flex; align-items: center; justify-content: center; gap: 55px; margin-top: 10px;">
+    <img src="images3/blender.png" width="80">
+    <p style="margin-left: -30px; scale: 0.8;">Blender</p >
     <button class="filter-btn" data-target="blender" onclick="toggleFilter(this)">工程</button>
   </div>
 
@@ -192,33 +230,84 @@
   <div id="project-list" style="margin-top: 50px;">
 
     <div class="project-item" data-type="ae" style="display: none;">
-      <h2 style="scale: 0.8;">After Effect 工程</h2>
-      <p>暂未有福利工程</p >
+      <h2 style="scale: 0.8; margin-right: 70px;">After Effect 工程</h2>
+      <p style="margin-right: 88px;">暂未有福利工程</p >
 
     </div>
 
     <div class="project-item" data-type="nv" style="display: none;">
-      <h2 style="scale: 0.8;">NodeVideo pack</h2>
-      <p style="scale: 0.8;">仿小雾神3D</p >
+      <h2 style="scale: 0.8; margin-right: 70px;">NodeVideo pack</h2>  
+      <p style="scale: 0.8;  margin-right: 142px;">仿小雾神3D</p >
+         <p style="scale: 0.8;  margin-right: -140px; margin-top: -36px;">提取码: ba68</p >
   <a href="https://pan.baidu.com/s/1LRo2XBsB3sLhub8BcxjpBA 提取码: ba68" target="_blank">百度网盘下载</a >
   <a href="https://drive.google.com/file/d/1-3XsPiHWuMjzgTxxB6wS6l4TsHws0HC8/view?usp=drive_link" target="_blank" style="margin-left: 10px;">Google Drive 下载</a >
 </div>
     </div>
 
      <div class="project-item" data-type="nv" style="display: none;">
-      <h2 style="scale: 0.8;">NodeVideo pack</h2>
-      <p style="scale: 0.8;">高仿gus-logo</p >
+      <h2 style="scale: 0.8; margin-right: 70px;">NodeVideo pack</h2>
+      <p style="scale: 0.8; margin-right: 125px;">高仿gus-logo</p >
+         <p style="scale: 0.8;  margin-right: -140px; margin-top: -36px;">提取码: buvk </p >
   <a href="https://pan.baidu.com/s/1vwGO7Duy74nhaqvFDqv1Zg 提取码: buvk" target="_blank">百度网盘下载</a >
   <a href="https://drive.google.com/file/d/1Cp_fT2Kvi2MSJ51zGZfxL2Mpi_fOzDoc/view?usp=drive_link" target="_blank" style="margin-left: 10px;">Google Drive 下载</a >
     </div>
 
+     <div class="project-item" data-type="nv" style="display: none;">
+      <h2 style="scale: 0.8; margin-right: 70px;">NodeVideo pack</h2>
+      <p style="scale: 0.8; margin-right: 95px;">诗川高仿版shake1</p >
+         <p style="scale: 0.8;  margin-right: -160px; margin-top: -36px;">提取码: ui9m </p >
+  <a href="https://pan.baidu.com/s/1qmGL-t-_W7TrpnowK-97_Q 提取码: ui9m" target="_blank">百度网盘下载</a >
+  <a href="https://drive.google.com/file/d/1TI6ovsbKRHJGRlhXwl0lq4Msb9HUK8mc/view?usp=drive_link" target="_blank" style="margin-left: 10px;">Google Drive 下载</a 
+>
+    </div>
+     <div class="project-item" data-type="nv" style="display: none;">
+      <h2 style="scale: 0.8; margin-right: 70px;">NodeVideo pack</h2>
+      <p style="scale: 0.8; margin-right: 115px;">24开头旋转动画</p >
+         <p style="scale: 0.8;  margin-right: -140px; margin-top: -36px;">提取码: tqhh </p >
+  <a href="https://pan.baidu.com/s/1iAmVY2Pwde_aL5iE5mIrzA 提取码: tqhh" target="_blank">百度网盘下载</a >
+  <a href="https://drive.google.com/file/d/1oKHcZp-UoIIG5oPm12ReOB2yxXvdchXT/view?usp=drive_link" target="_blank" style="margin-left: 10px;">Google Drive 下载</a >
+    </div>
+
     <div class="project-item" data-type="blender" style="display: none;">
-      <h2 style="scale: 0.8;">Blender 模型</h2>
-      <p>暂未有福利工程</p >
+      <h2 style="scale: 0.8; margin-right: 110px;">Blender 模型</h2>
+      <p style="margin-right: 88px;">暂未有福利工程</p >
     </div>
 </div>
-
+<style>.project-item-c {
+      background: rgba(255,255,255,0.1);
+      border-radius: 20px;
+      padding: 20px;
+      margin: 15px auto;
+      max-width: 500px;
+    }
+    </style>
 </div>
+
+ <!-- 联系 -->
+  <div id="contact" class="page">
+    <h1>剪辑师</h1>
+    <p>邮箱：zhuty968@icloud.com</p >
+        <img src="images2/profile pict5.jpg" width="100" style="border-radius: 70px; outline: 1px solid white;"position="absolute" top="100" left="100">
+        <p>Shichuan</p >
+     <p style="margin-top: -10px;">微信ID：T-S12C-Z</p >
+
+   <!-- Hithik & Mtia 折叠框 -->
+<details 
+style="margin-top: 20px;">
+  <summary >
+    查看其他剪辑师
+  </summary>
+        <img src="images2/mtiapict1.jpg" width="100" style="border-radius: 70px; outline: 1px solid white;"position="absolute" top="100" left="100">
+        <p>Mtia</p >
+     <p style="margin-top: -10px;">微信ID：jun505593633</p >
+</details>
+        <h1 style="margin-top: 40px;">赞助商</h1>
+        <img src="images2/zc4.jpg" width="100" style="border-radius: 70px; outline: 1px solid white;"position="absolute" top="100" left="100" >
+         <p>Robotcat</p >
+     <p style="margin-top: -10px;">微信ID：Robotcat08</p >
+  </div>
+
+
   <!-- 本站 -->
   <div id="about" class="page">
     <h1>关于本站</h1>
@@ -229,26 +318,22 @@
         <a href="https://darkclub-9bab5.web.app" target="_blank"style=“color:hite:text-decoration:underline:”>
           Darkclub.com
         </a>
-   <p style="opacity: 35%; scale: 1.1; margin-top:80px;">此页面仍在开发中</p >
+       
+      <div class="project-item-c"  style="margin-top: 100px; ">
+        <p style="margin-top: 0%; background-color: #0000000e; border-radius: 10px; outline: 0.6px solid rgba(255, 255, 255, 0.438); ">特别感谢长久以来的支持</p >
+         <div class="project-item-c" data-type="ae" style="margin-top: 10px; background-color: rgba(0, 0, 0, 0.034);"> 
+          <p style="scale: 0.95; color: rgb(255, 255, 255); margin-top: -6px; ">国内名单</p>
+          <p style="scale: 0.8; color: rgba(255, 255, 255, 0.678);">拾朝阳, 棂, 横屏, 酱丘，LanYue, 石头, 孤独HC, NV_导师, 阿信, NV_峰峰, 余温, 小源, 奶茶, 大于, Jiao, 冷眸, 水淼, 时迁, 小涛, 阳奕, 南瓜, 情予眠, 树藤, 凛, 小白七, 星光, 幕川, 鸡崽, 抓拍, 六便士, 佳乐, 无宇, Vain</p>
+        </div>
+        <div class="project-item-c"  style="margin-top: 10px; background-color: rgba(3, 3, 3, 0.034);"> 
+          <p style="scale: 0.95; color: rgb(255, 255, 255); margin-top: -6px; ">国外名单</p>
+          <p style="scale: 0.8;color: rgba(255, 255, 255, 0.678);">神明, Mtia, 搁浅, 虚无, Lx言, Yux, Rui, 妙妙屋, 铁某, Traveler97, Lindo, Hithik, 晚安, Rext</p>
+        </div> 
+        <div>
+           <p style="opacity: 35%; scale: 1.1;">此页面仍在更新中</p >
+        </div>
 
-  </div>
-
-  <!-- 联系 -->
-  <div id="contact" class="page">
-    <h1>剪辑师</h1>
-    <p>邮箱：zhuty968@icloud.com</p >
-        <img src="images2/profile pict5.jpg" width="100" style="border-radius: 70px; outline: 1px solid white;"position="absolute" top="100" left="100">
-        <p>Shichuan</p >
-     <p style="margin-top: -10px;">微信ID：T-S12C-Z</p >
-        <img src="images2/mtiapict1.jpg" width="100" style="border-radius: 70px; outline: 1px solid white;"position="absolute" top="100" left="100">
-        <p>Mtia</p >
-     <p style="margin-top: -10px;">微信ID：jun505593633</p >
-
-        <h1 style="margin-top: 40px;">赞助商</h1>
-        <img src="images2/zc4.jpg" width="100" style="border-radius: 70px; outline: 1px solid white;"position="absolute" top="100" left="100" >
-         <p>Robotcat</p >
-     <p style="margin-top: -10px;">微信ID：Robotcat08</p >
-  </div>
+ 
 
   <script>
     function showPage(id, btn) {
@@ -275,6 +360,16 @@
         }
       });
     }
+
+    function toggleTheme() {
+  document.body.classList.toggle('dark');
+  const btn = document.getElementById('theme-toggle');
+  if (document.body.classList.contains('dark')) {
+    btn.textContent = '亮';
+  } else {
+    btn.textContent = '暗';
+  }
+}
   </script>
 </body>
 </html>
